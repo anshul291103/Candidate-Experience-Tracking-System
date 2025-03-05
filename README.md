@@ -38,10 +38,9 @@ A Flask-based web application for candidate feedback management, integrating a M
    - If Flask runs on a different port, adjust the URL accordingly.
 
 ## Database Setup
-To set up the database, run the following command in MySQL:
-```sql
-source schema.sql;
-```
+To set up the database, run the following file in MySQL:
+```schema.sql;```
+
 
 ## Environment Variables Setup
 
@@ -50,6 +49,8 @@ To secure sensitive credentials, use a .env file. Create a .env file in the proj
 SQLALCHEMY_DATABASE_URI=mysql+pymysql://<DB_USER>:<DB_PASSWORD>@localhost/candidate_experience_db
 SECRET_KEY=your_secret_key_here
 ```
+<DB_USER> → Replace with your MySQL username (e.g., root).
+<DB_PASSWORD> → Replace with your MySQL password.
 
 ## Note
 Make sure to generate the `requirements.txt` file before pushing your project by running:
