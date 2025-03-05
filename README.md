@@ -37,6 +37,11 @@ A Flask-based web application for candidate feedback management, integrating a M
    - Click on the link displayed in the terminal (usually `http://127.0.0.1:5000/`).
    - If Flask runs on a different port, adjust the URL accordingly.
 
+## Database Setup
+To set up the database, run the following command in MySQL:
+```sql
+source schema.sql;
+
 ## Note
 Make sure to generate the `requirements.txt` file before pushing your project by running:
 ```bash
