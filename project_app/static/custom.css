@@ -1,0 +1,76 @@
+/* custom.css */
+
+/* General Styles */
+body {
+    background-color: #e8eaf6; /* Light gray background for a soft look */
+    font-family: 'Arial', sans-serif; /* Use a clean sans-serif font */
+    color: #343a40; /* Dark gray text for readability */
+}
+
+/* Header Styles */
+header {
+    background-color: #0056b3; /* Darker blue for header background */
+    padding: 20px; /* Padding for the header */
+    color: black; /* Text color for the header */
+}
+
+h1, h2, h3 {
+    color: black; /* Change all headings to black */
+}
+
+/* Flash Message Styles */
+.alert {
+    margin-top: 20px; /* Space between flash messages and content */
+}
+
+/* Table Styles */
+.table {
+    border-radius: 0.25rem; /* Rounded corners for tables */
+    overflow: hidden; /* Prevent overflow for rounded corners */
+    background-color: #e8eaf6; /* Match table background color with body */
+}
+
+.table tbody tr {
+    background-color: #e8eaf6; /* Set all table rows to the same background color */
+}
+
+/* Remove Bootstrap striped effect */
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: transparent; /* Remove odd row background */
+}
+
+/* Button Styles */
+.btn {
+    border-radius: 0.25rem; /* Rounded button corners */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition for background and scaling */
+}
+
+.btn:hover {
+    background-color: #004494; /* Darker blue on hover */
+    transform: scale(1.05); /* Scale button slightly on hover */
+}
+
+/* Form Styles */
+.form-group label {
+    font-weight: bold; /* Bold labels for better visibility */
+}
+
+.form-control {
+    border: 1px solid #ced4da; /* Standard border color */
+    border-radius: 0.25rem; /* Rounded input fields */
+}
+
+/* Card Styles for Reports */
+.card {
+    margin-top: 20px; /* Space above cards */
+    border: 1px solid #dee2e6; /* Standard border for cards */
+    border-radius: 0.25rem; /* Rounded corners */
+    background-color: #ffffff; /* White background for cards */
+}
+
+/* Responsive Styles */
+@media (max-width: 576px) {
+    .container {
+        padding: 0 15px; /* Add padding on small screens */
+    }
+}

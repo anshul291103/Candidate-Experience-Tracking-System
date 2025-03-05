@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}View Candidates{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Candidates List</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Candidate ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Date of Birth</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Status</th>
+                <th>LinkedIn Profile</th>
+                <th>Skills</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for candidate in candidates %}
+            <tr>
+                <td>{{ candidate.CandidateID }}</td>
+                <td>{{ candidate.Name }}</td>
+                <td>{{ candidate.Email }}</td>
+                <td>{{ candidate.DateOfBirth.strftime('%Y-%m-%d') if candidate.DateOfBirth else 'N/A' }}</td>
+                <td>{{ candidate.Phone or 'N/A' }}</td>
+                <td>{{ candidate.Address or 'N/A' }}</td>
+                <td>{{ candidate.Status }}</td>
+                <td><a href="{{ candidate.LinkedInProfile }}" target="_blank">LinkedIn</a></td>
+                <td>{{ candidate.Skills or 'N/A' }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <div style="display: flex; margin-bottom: 20px;">
+        <!-- Button for requesting candidate ID for updation -->
+        <form action="{{ url_for('request_edit_candidate') }}" method="get" style="margin-right: 20px;">
+            <button type="submit" class="btn btn-primary">Edit Candidate</button>
+        </form>
+    
+        <!-- Button to go to the request delete candidate page -->
+        <form action="{{ url_for('request_delete_candidate') }}" method="get">
+            <button type="submit" class="btn btn-primary">Delete Candidate</button>
+        </form>
+    </div>
+    
+    </form>
+
+</div>
+{% endblock %}

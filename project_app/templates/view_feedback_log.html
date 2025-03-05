@@ -1,0 +1,36 @@
+<!-- templates/view_feedback_log.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}Feedback Log - Candidate Experience Tracking System{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-3">Feedback Submission Log</h1>
+    <table class="table table-hover">
+        <thead class="thead-light">
+            <tr>
+                <th>Log ID</th>
+                <th>Feedback ID</th>
+                <th>Submission Date</th>
+                <th>Submitted By</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for log in feedback_log_list %}
+            <tr>
+                <td>{{ log.LogID }}</td>
+                <td>{{ log.FeedbackID }}</td>
+                <td>{{ log.SubmissionDate.strftime('%Y-%m-%d') }}</td>
+                <td>{{ log.SubmittedBy }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Button to go back to main feedback view -->
+    <form action="{{ url_for('view_feedback') }}" method="get">
+        <button type="submit" class="btn btn-primary" style="margin-bottom: 20px;">Back to Feedback</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,61 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Candidate</title> 
+    <!-- Bootstrap CSS (add the link if you haven't already) 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body> -->
+    {% extends 'base.html' %}
+
+    {% block title %}Delete Candidate{% endblock %}
+
+    {% block content %}
+    <div class="container mt-4">
+        <h2>Delete a Candidate</h2>
+        
+        <form method="POST" action="{{ url_for('request_delete_candidate') }}">
+            <div class="form-group">
+                <label for="candidate_id">Enter Candidate ID to delete:</label>
+                <input type="text" name="candidate_id" id="candidate_id" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Delete Candidate</button>
+        </form>
+
+        <h3 class="mt-4">All Candidates</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Candidate ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Date of Birth</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Status</th>
+                    <th>LinkedIn Profile</th>
+                    <th>Skills</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for candidate in candidates %}
+                <tr>
+                    <td>{{ candidate.CandidateID }}</td>
+                    <td>{{ candidate.Name }}</td>
+                    <td>{{ candidate.Email }}</td>
+                    <td>{{ candidate.DateOfBirth.strftime('%Y-%m-%d') if candidate.DateOfBirth else 'N/A' }}</td>
+                    <td>{{ candidate.Phone or 'N/A' }}</td>
+                    <td>{{ candidate.Address or 'N/A' }}</td>
+                    <td>{{ candidate.Status }}</td>
+                    <td><a href="{{ candidate.LinkedInProfile }}" target="_blank">LinkedIn</a></td>
+                    <td>{{ candidate.Skills or 'N/A' }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+    {% endblock %}
+<!-- </body> -->
+</html>

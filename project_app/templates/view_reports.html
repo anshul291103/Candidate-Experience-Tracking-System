@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+View Reports
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Reports Overview</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Report ID</th>
+                <th>Recruiter ID</th>
+                <th>Date</th>
+                <th>Title</th>
+                <th>Content</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for report in reports %}
+            <tr>
+                <td>{{ report.ReportID }}</td>
+                <td>{{ report.RecruiterID }}</td>
+                <td>{{ report.ReportDate.strftime('%Y-%m-%d') }}</td>
+                <td>{{ report.Title }}</td>
+                <td>{{ report.ReportContent }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

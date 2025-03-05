@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Archived Feedback - Candidate Experience Tracking System{% endblock %}
+
+{% block content %}
+<div class="mt-4">
+    <h1 class="mb-3">Archived Feedback</h1>
+    
+    <!-- Optional Search Form -->
+    <form method="get" action="/view_archived_feedback" class="mb-4">
+        <div class="form-group">
+            <input type="text" name="query" placeholder="Search Archived Feedback..." class="form-control mb-2">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
+
+    <!-- Archived Feedback Table -->
+    <table class="table table-hover">
+        <thead class="thead-light">
+            <tr>
+                <th>Feedback ID</th>
+                <th>Candidate ID</th>
+                <th>Feedback Date</th>
+                <th>Comments</th>
+                <th>Interviewer Name</th>
+                <th>Experience Score</th>
+                <th>Archive Date</th> <!-- Include the archive date -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for feedback in archived_feedback_list %}
+                <tr>
+                    <td>{{ feedback.FeedbackID }}</td>
+                    <td>{{ feedback.CandidateID }}</td>
+                    <td>{{ feedback.FeedbackDate.strftime('%Y-%m-%d') }}</td>
+                    <td>{{ feedback.Comments or 'No comments provided' }}</td>
+                    <td>{{ feedback.InterviewerName or 'N/A' }}</td>
+                    <td>{{ feedback.ExperienceScore or 'N/A' }}</td>
+                    <td>{{ feedback.ArchiveDate.strftime('%Y-%m-%d') }}</td> <!-- Display the archive date -->
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Button to go back to current feedback -->
+    <form action="{{ url_for('view_feedback') }}" method="get">
+        <button type="submit" class="btn btn-primary" style="margin-bottom: 20px;">Back to Current Feedback</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Enter Candidate ID to Edit</h2>
+    <form method="POST" action="{{ url_for('request_edit_candidate') }}">
+        <div class="form-group">
+            <label for="candidate_id">Candidate ID:</label>
+            <input type="number" class="form-control" id="candidate_id" name="candidate_id" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% endblock %}

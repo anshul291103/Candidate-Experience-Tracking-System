@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Feedback Dashboard</h2>
+    
+    <div class="row mb-3">
+        <!-- Average Score Panel -->
+        <div class="col-md-4">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-header">Average Overall Score</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ average_score|default('No data', true)|round(2, 'floor') }}</h5>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sentiment Distribution Panel -->
+        <div class="col-md-4">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-header">Sentiment Distribution</div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        {% for sentiment, count in sentiment_counts %}
+                        <li class="list-group-item bg-transparent">{{ sentiment }}: {{ count }}</li>
+                        {% else %}
+                        <li class="list-group-item bg-transparent">No sentiment data available.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Consent Given Rate Panel -->
+        <div class="col-md-4">
+            <div class="card text-white bg-info mb-3">
+                <div class="card-header">Consent Given Rate</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ consent_percentage|default('No data', true)|round(2, 'floor') }}%</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Score by Stage Chart -->
+    <div class="mb-3">
+        <canvas id="scoreByStageChart"></canvas>
+    </div>
+
+    <!-- Include Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var ctx = document.getElementById('scoreByStageChart').getContext('2d');
+            var labels = {{ labels|tojson|safe }};
+            var scores = {{ scores|tojson|safe }};
+            var scoreByStageChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Average Score by Stage',
+                        data: scores,
+                        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+    </div>
+
+{% endblock %}

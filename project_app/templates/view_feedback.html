@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}View Feedback - Candidate Experience Tracking System{% endblock %}
+
+{% block content %}
+<div class="mt-4">
+    <h1 class="mb-3">Feedback Submitted</h1>
+    
+    <!-- Search Form -->
+    <form method="get" action="/view_feedback" class="mb-4">
+        <div class="form-group">
+            <input type="text" name="query" placeholder="Search Feedback..." class="form-control mb-2">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
+
+    <!-- Feedback Table -->
+    <table class="table table-hover">
+        <thead class="thead-light">
+            <tr>
+                <th>Feedback Date</th>
+                <th>Stage Name</th>
+                <th>Date of Interview</th>
+                <th>Interviewer Name</th>
+                <th>Sentiment</th>
+                <th>Feedback</th>
+                <th>Suggestions</th>
+                <th>Overall Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in feedback %}
+            <tr>
+                <td>{{ item.FeedbackDate.strftime('%Y-%m-%d') }}</td>
+                <td>{{ item.StageName or 'N/A' }}</td>
+                <td>{{ item.InterviewDate.strftime('%Y-%m-%d') if item.InterviewDate else 'N/A' }}</td>
+                <td>{{ item.Name or 'N/A' }}</td>                
+                <td>{{ item.Sentiment or 'N/A' }}</td>
+                <td>{{ item.Comments or 'No comments provided' }}</td>
+                <td>{{ item.FollowUpQuestion }}</td>
+                <td>{{ item.ExperienceScore or 'N/A' }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Button Section with Enhanced Spacing -->
+    <div class="d-flex mt-3">
+        <!-- Button to view archived feedback -->
+        <form action="{{ url_for('view_archived_feedback') }}" method="get">
+            <button type="submit" class="btn btn-primary" style="margin-bottom: 20px;">Feedback Archive</button>
+        </form>
+
+        <!-- Button to view feedback log with added margin -->
+        <form action="{{ url_for('view_feedback_log') }}" method="get" style="margin-left: 20px;">
+            <button type="submit" class="btn btn-primary" style="margin-bottom: 20px;">Feedback Log</button>
+        </form>
+    </div>   
+
+</div>
+{% endblock %}

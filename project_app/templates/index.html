@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Candidate Experience Tracking System{% endblock %}
+
+{% block content %}
+
+<!-- Header Section -->
+<header class="bg-primary text-white text-center py-4" style="margin: 0; padding: 20px 0;">
+    <h1 class="display-4">Candidate Experience Tracking System</h1>
+</header>
+
+<div class="mt-4 text-center">
+    <!-- Main Content Section with Image and Information Side by Side -->
+    <div class="d-flex justify-content-center align-items-start mb-4">
+        <!-- First Image -->
+        <div style="flex: 1; max-width: 45%; padding-right: 15px;">
+            <img src="https://images.ctfassets.net/co0pvta7hzrh/1p7JdgcFYdLBb1gLgwXNOY/9c03746e17ff3ba2ec195c071b7beb43/candidate-experience-survey-template-hero.jpeg" 
+                 alt="Recruitment Process" 
+                 class="img-fluid rounded" 
+                 style="width: 100%; height: auto;">
+        </div>
+
+        <!-- Information Section -->
+        <div style="flex: 1; max-width: 50%;">
+            <h2 class="h3">About Us</h2>
+            <p class="lead">This system is designed to gather feedback from candidates about their experience during the recruitment process. We value your insights to improve our hiring practices and ensure a positive experience for all candidates.</p>
+            <p class="lead">Our goal is to create an efficient and transparent recruitment process where candidates feel valued and heard. By sharing your feedback, you contribute to the enhancement of our practices, making it better for future candidates.</p>
+        </div>
+    </div>
+
+    <!-- Second Section with Text and Image Side by Side -->
+    <div class="d-flex justify-content-center align-items-start mb-4">
+        <!-- Additional Information Text -->
+        <div style="flex: 1; max-width: 45%; padding-right: 15px;">
+            <p class="lead">Your feedback is crucial in helping us understand the strengths and areas for improvement in our recruitment process. Please take a moment to share your thoughts!</p>
+            
+            <!-- Conditional Display of Submit Feedback Button -->
+            {% if session['role'] == 'Candidate' or session['role'] == 'Admin' %}
+                <div class="text-center">
+                    <a href="{{ url_for('submit_feedback') }}" class="btn btn-warning">Submit Your Feedback</a>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Second Image Positioned to the Right -->
+        <div style="flex: 1; max-width: 45%;">
+            <img src="https://blog.infodiagram.com/wp-content/uploads/2021/11/Presenting-the-Recruitment-Process-Clearly-in-PowerPoint.png" 
+                 alt="DBMS Project Image 2" 
+                 class="img-fluid rounded" 
+                 style="width: 100%; height: auto;">
+        </div>
+    </div>
+</div>
+
+<!-- Footer Section -->
+<footer class="bg-dark text-white text-center" style="margin: 0; padding: 20px 0;">
+    <div class="row mx-0">
+        <div class="col-md-4">
+            <div class="card bg-dark text-white border-0">
+                <div class="card-header bg-secondary">Feedback Overview</div>
+                <div class="card-body">
+                    <p><strong>Total Feedback:</strong> {{ total_feedback }}</p>
+                    <p><strong>Average Score:</strong> {{ avg_score or 'No data available' }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-dark text-white border-0">
+                <div class="card-header bg-secondary">Recent Feedback</div>
+                <div class="card-body">
+                    <ul>
+                        {% for feedback in recent_feedback[:2] %}
+                        <li>{{ feedback.Comments }} (Score: {{ feedback.ExperienceScore }})</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+{% endblock %}
